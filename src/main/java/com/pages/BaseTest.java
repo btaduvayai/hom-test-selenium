@@ -1,43 +1,27 @@
 package com.pages;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-
-public class LoginPage {
-	
-	
-	public LoginPage(WebDriver driver) {
-		PageFactory.initElements(driver, this);
-	}
-	
-	@FindBy(xpath="//h2")
-	public WebElement headerLoginPage;
-
-	
-	@FindBy(css="#username")
-	public WebElement usernameField;
-	
-	@FindBy(xpath="#password")
-	public WebElement passwordField;
-	
-	@FindBy(xpath="//button[@type='submit']")
-	public WebElement buttonLogin;
-	
-	@FindBy(css="div#flash")
-	public WebElement flasMessage;
-	
-	public void login(String uname, String pwd){
+public class BaseTest {
+	public WebDriver driver;
+	public void openURL(String url) {
+		driver=new ChromeDriver();
 		
-		usernameField.sendKeys(uname);
-		passwordField.sendKeys(pwd);
-		buttonLogin.click();
-		
+		driver.get(getBaseURL()+url);
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(5000,TimeUnit.SECONDS);
 		
 	}
 	
+public String getBaseURL() {
 	
+	return "https://localhost:7080";
+		
+	}
 
 }
