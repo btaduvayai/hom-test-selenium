@@ -42,12 +42,12 @@ public class UITest extends BaseTest {
 	public void testLoginSuccess() {
 
 		openURL("/login");
-		LoginPage loginPage = new LoginPage();
+		LoginPage loginPage = new LoginPage(driver);
 		loginPage.login("tomsmith", "SuperSecretPassword!");
 
 		String url=driver.getCurrentUrl();
 		assertEquals(getBaseURL()+"/secure", url);
-		SecurePage securePage = new SecurePage();
+		SecurePage securePage = new SecurePage(driver);
 		assertEquals("You logged into a secure area!", securePage.flasMessage.getText());
 
 	}
@@ -56,7 +56,7 @@ public class UITest extends BaseTest {
 	public void testLoginFailure() {
 
 		openURL("/login");
-		LoginPage loginPage = new LoginPage();
+		LoginPage loginPage = new LoginPage(driver);
 		loginPage.login("tomsmit", "SuperSecretPassword!");
 
 		String url=driver.getCurrentUrl();
